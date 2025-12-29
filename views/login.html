@@ -60,6 +60,8 @@
                 if (response.ok) {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('username', data.username);
+                    localStorage.setItem('limitStorage', data.limitStorage);
+                    localStorage.setItem('usedStorage', data.usedStorage);
                     window.location.href = '/dashboard';
                 } else {
                     errorDiv.textContent = data.message || 'Login failed';

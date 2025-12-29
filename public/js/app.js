@@ -271,13 +271,14 @@ function renderFiles() {
         return `
             <div class="file-card">
                 <div class="file-icon">${icon}</div>
-                <div class="file-name">${file.originalName}</div>
-                <div class="file-info">${size} • ${date}</div>
+                <div class="info-con">
+                    <div class="file-name">${file.originalName}</div>
+                    <div class="file-info">${size} • ${date}</div>
+                </div>
                 <div class="file-actions">
                     <button class="btn-action btn-download" onclick="downloadFile('${file._id}', '${file.originalName}')">
                         Download
                     </button>
-
                     <button class="btn-action btn-delete" onclick="deleteFile('${file._id}')">
                         Delete
                     </button>

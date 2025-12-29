@@ -335,23 +335,37 @@ body {
 }
 
 .files-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* display: grid; */
+    /* grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); */
     gap: 16px;
 }
 
 .file-card {
+    display: flex;
     background: #f8f9fa;
     border: 2px solid #e1e8ed;
+    width: 100%;
     border-radius: 12px;
     padding: 16px;
     text-align: center;
     transition: all 0.3s;
+
     cursor: pointer;
 }
 
+.info-con {
+    flex: 1;
+    margin-left: 16px;
+    margin-right: 16px;
+    text-align: left;
+}
+
 .file-card:hover {
-    transform: translateY(-4px);
+    /* transform: translateY(-4px); */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-color: #667eea;
 }
@@ -377,6 +391,7 @@ body {
 
 .file-actions {
     display: flex;
+    flex-direction: column;
     gap: 8px;
     justify-content: center;
     flex-wrap: wrap;

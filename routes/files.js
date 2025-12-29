@@ -66,8 +66,18 @@ router.post('/upload', auth, upload.single('file'), async (req, res) => {
 // Get all files
 router.get('/', auth, async (req, res) => {
     try {
-        const { folderId } = req.query;
+
         const query = { userId: req.userId };
+        const filesAll = await File.find(query);
+
+        // console.log('Retrieved files:', filesAll);
+        let totalSize = 0;
+        filesAll.forEach(file => {
+            totalSize += file.size;
+        });
+        console.log('Total used storage (MB):', (totalSize / (1024 * 1024)).toFixed(2));
+
+        const { folderId } = req.query;
 
         if (folderId) {
             query.folderId = folderId;

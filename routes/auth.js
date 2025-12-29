@@ -1,7 +1,9 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const File = require('../models/File');
 const router = express.Router();
+// const fs = require('fs');
 
 // Register
 router.post('/register', async (req, res) => {
@@ -44,7 +46,18 @@ router.post('/login', async (req, res) => {
 
         res.cookie('token', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
         console.log('Login successful, token set in cookie');
-        res.json({ message: 'Login successful', token, username: user.username });
+
+        const query = { userId: user._id };
+        const filesAll = await File.find(query);
+
+        let totalSize = 0;
+        filesAll.forEach(file => {
+            totalSize += file.size;
+        });
+        let usedStorageMB = (totalSize / (1024 * 1024)).toFixed(2);
+        console.log('Total used storage (MB):', usedStorageMB);
+
+        res.json({ message: 'Login successful', token, username: user.username, limitStorage: user.limitStorage, usedStorage: usedStorageMB });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
