@@ -6,6 +6,16 @@ if (!token) {
     console.log('User is authenticated with token:', token);
 }
 
+let bar = document.querySelector("#loading-bar");
+let progress = document.querySelector("#progress");
+let mbused = document.querySelector("#mbused");
+let reporter = document.querySelector("p > span");
+
+// progress.style.width = 50 + "%";
+// reporter.textContent = 50;
+
+
+
 // State
 let currentFolderId = null;
 let currentFileId = null;
@@ -124,6 +134,14 @@ async function apiCall(url, options = {}) {
         if (response.status === 401) {
             logout();
             return null;
+        }
+
+        let usedStorage = localStorage.getItem('usedStorage');
+        if (usedStorage) {
+            mbused.textContent = usedStorage;
+            let usedPercent = (parseFloat(usedStorage) / 200) * 100;
+            progress.style.width = usedPercent + "%";
+            // reporter.textContent = usedPercent;
         }
 
         const data = await response.json();

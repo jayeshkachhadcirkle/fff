@@ -12,6 +12,10 @@
     <div class="dashboard">
         <nav class="navbar">
             <div class="nav-brand"> Files</div>
+
+
+
+
             <div class="nav-actions">
                 <span id="userGreeting"></span>
                 <button id="logoutBtn" class="btn btn-secondary">Logout</button>
@@ -41,6 +45,15 @@
             </aside>
 
             <main class="content">
+
+                <div class="nav-progress">
+                    <span>Storage Available:</span>
+                    <div id="loading-bar">
+                        <div id="progress"></div>
+                    </div>
+                    <p><span id="mbused">0</span> / 200 MB</p>
+                </div>
+
                 <div class="content-header">
                     <div class="breadcrumb">
                         <span id="currentLocation">All Files</span>
